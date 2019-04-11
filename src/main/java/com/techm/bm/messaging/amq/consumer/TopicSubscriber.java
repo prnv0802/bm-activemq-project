@@ -21,7 +21,7 @@ public class TopicSubscriber {
 	public void listen(@Payload String payload) {
 		LOGGER.info("Message : listen : " + payload);
 		try {
-			System.out.println("Listening Message " + payload);
+			System.out.println("TopicSubscriber: Listening Message " + payload);
 
 			// utilise the object mapper here to convert the 
 			// message to your desired model.

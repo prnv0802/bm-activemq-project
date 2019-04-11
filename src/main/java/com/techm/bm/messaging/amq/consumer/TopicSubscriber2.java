@@ -22,7 +22,7 @@ public class TopicSubscriber2 {
 	public void listen(DummyModel model) {
 		LOGGER.info("Message : listen : model " + model);
 		try {
-			System.out.println("Listening Message model" + model);
+			System.out.println("TopicSubscriber2: Listening Message model" + model);
 
 			// utilise the object mapper here to convert the 
 			// message to your desired model.

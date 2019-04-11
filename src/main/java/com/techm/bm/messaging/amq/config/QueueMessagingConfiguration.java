@@ -1,4 +1,4 @@
-package com.techm.bm.messaging.amq.queueconfig;
+package com.techm.bm.messaging.amq.config;
 
 import java.util.Arrays;
 
@@ -7,17 +7,20 @@ import javax.jms.ConnectionFactory;
 import org.apache.activemq.spring.ActiveMQConnectionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.connection.CachingConnectionFactory;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.messaging.converter.MessageConverter;
 import org.springframework.messaging.converter.SimpleMessageConverter;
 
+@Conditional(P2PCondition.class)
 @Configuration
-public class MessagingConfiguration {
+public class QueueMessagingConfiguration {
 
 	@Value("${spring.activemq.broker-url}")
 	private String brokerUrl;
+	
 	
 	@Value("${sender-queue}")
 	private String senderQueue;
@@ -26,6 +29,10 @@ public class MessagingConfiguration {
 	@Value("${session-cache-size}")
 	private int sessionCacheSize;
 	
+	public QueueMessagingConfiguration() {
+		super();
+		System.out.println("Creating QueueMessagingConfiguration");
+	}
 	
 	@Bean
 	public ActiveMQConnectionFactory connectionFactory(){

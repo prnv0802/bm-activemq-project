@@ -39,16 +39,16 @@ public class Application {
 			e.printStackTrace();
 		}
 		
-		context.getBean(TopicPublisher2.class).send(new DummyModel("Pranav", "1"));
-		
-		try {
-			Thread.sleep(10);
-			System.out.println("Sleeping 10 ms after Publisher 2");
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+//		context.getBean(TopicPublisher2.class).send(new DummyModel("Pranav", "1"));
+//		
+//		try {
+//			Thread.sleep(10);
+//			System.out.println("Sleeping 10 ms after Publisher 2");
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
 	}
 
 	
