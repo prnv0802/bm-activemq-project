@@ -21,10 +21,10 @@ public class MessageReceiver {
 	public void receiveMessage(final Message<DummyModel> message) throws JMSException {
 		LOG.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		MessageHeaders headers =  message.getHeaders();
-		LOG.info("Application : headers received : {}", headers);
+		LOG.info("MessageReceiver : headers received : {}", headers);
 		
 		DummyModel response = message.getPayload();
-		LOG.info("Application : response received : {}",response);	
+		LOG.info("MessageReceiver : response received : {}",response);	
 		LOG.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
 	}
 }

@@ -14,7 +14,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.messaging.converter.MessageConverter;
 import org.springframework.messaging.converter.SimpleMessageConverter;
 
-@Conditional(PubSubCondition.class)
+@Conditional(PubSubModeCondition.class)
 @Configuration
 public class TopicProducerConfiguration {
 
@@ -27,6 +27,9 @@ public class TopicProducerConfiguration {
 
 	@Value("${session-cache-size}")
 	private int sessionCacheSize;
+	
+	@Value("${spring.jms.pub-sub-domain}")
+	private boolean pubSubDomain;
 	
 	
 	
@@ -60,6 +63,7 @@ public class TopicProducerConfiguration {
 		JmsTemplate template = new JmsTemplate();
 		template.setConnectionFactory(connectionFactory());
 		template.setDefaultDestinationName(producerTopic);
+		template.setPubSubDomain(pubSubDomain);
 		return template;
 	}
 

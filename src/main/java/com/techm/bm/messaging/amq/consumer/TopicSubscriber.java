@@ -19,9 +19,9 @@ public class TopicSubscriber {
 	
 	@JmsListener(destination = "${topic.name2}")
 	public void listen(@Payload String payload) {
-		LOGGER.info("Message : listen : " + payload);
+		LOGGER.info("TopicSubscriber : listen : " + payload);
 		try {
-			System.out.println("TopicSubscriber: Listening Message " + payload);
+			System.out.println("TopicSubscriber: Listening Payload String " + payload);
 
 			// utilise the object mapper here to convert the 
 			// message to your desired model.

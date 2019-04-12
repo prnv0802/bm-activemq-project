@@ -15,7 +15,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 import com.techm.bm.messaging.amq.model.DummyModel;
 import com.techm.bm.messaging.amq.sender.MessageSender;
-import com.techm.bm.messaging.amq.sender.TopicPublisher2;
+import com.techm.bm.messaging.amq.sender.TopicPublisher;
 
 @SpringBootApplication
 @ComponentScan("com.techm.bm.messaging.amq.*")
@@ -29,26 +29,29 @@ public class Application {
 
 		ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
 
+		// case 1 : mode p2p, jmpPubSUb false, Using MessageSender queueconfig works 
+		//context.getBean(MessageSender.class).sendMessage(new DummyModel("Pranav", "1"));
+//		
+		// case 2 : mode pubsub, Using TopicPublisher, TopicSubscriber Listens String payload
+		//context.getBean(TopicPublisher.class).send(new DummyModel("Pranav", "1"));
+		
+		// case 3: mode pubsub, Using Message Sender to send model, TopicSubscriber2 listens as it listens model. 
+		//context.getBean(MessageSender.class).sendMessage(new DummyModel("Pranav", "1"));
+		
+		// case 4 : mode both, Using TopicPublisher, nothing on MessageReceiver, All TopicSubscribers Listening
+		//context.getBean(TopicPublisher.class).send(new DummyModel("Pranav", "1"));
+		
+		// case 5 : mode pubsub, Using MessageSender
 		context.getBean(MessageSender.class).sendMessage(new DummyModel("Pranav", "1"));
 		
 		try {
 			Thread.sleep(10);
-			System.out.println("Sleeping 10 ms after Message Sender");
+			System.out.println("Sleeping 10 ms after Publisher 2");
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-//		context.getBean(TopicPublisher2.class).send(new DummyModel("Pranav", "1"));
-//		
-//		try {
-//			Thread.sleep(10);
-//			System.out.println("Sleeping 10 ms after Publisher 2");
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
 	}
 
 	

@@ -21,7 +21,7 @@ public class MessagingListnerConfiguration {
     public DefaultJmsListenerContainerFactory jmsListenerContainerFactory() {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
-        //factory.setPubSubDomain(pubSubDomain);
+        factory.setPubSubDomain(pubSubDomain);
         factory.setConcurrency("1-1");
         return factory;
     }

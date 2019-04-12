@@ -1,5 +1,8 @@
 package com.techm.bm.messaging.amq.consumer;
 
+import javax.jms.Message;
+
+import org.apache.activemq.command.ActiveMQTextMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,24 +13,23 @@ import com.techm.bm.messaging.amq.mapper.CustomObjectMapper;
 import com.techm.bm.messaging.amq.model.DummyModel;
 
 @Component
-public class TopicSubscriber2 {
+public class TopicSubscriber3 {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(TopicSubscriber2.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(TopicSubscriber3.class);
 
 	@Autowired
 	CustomObjectMapper mapper;
 	
 	@JmsListener(destination = "${topic.name2}")
-	public void listen(DummyModel model) {
-		LOGGER.info("\n" + 
-				"	TopicSubscriber2: listen : model " + model);
+	public void listen(Message message) {
+		LOGGER.info("TopicSubscriber3: listen Message " + message);
 		try {
-			System.out.println("TopicSubscriber2: Listening model" + model);
+			System.out.println("TopicSubscriber3: Listening Message" + message);
 
-			// utilise the object mapper here to convert the 
-			// message to your desired model.
-			
-			
+			if(message instanceof ActiveMQTextMessage)
+			{
+				System.out.println("Text Message "+((ActiveMQTextMessage) message).getText());
+			}
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		}

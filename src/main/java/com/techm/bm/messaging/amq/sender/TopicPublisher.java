@@ -10,9 +10,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.techm.bm.messaging.amq.mapper.CustomObjectMapper;
 
 @Component
-public class TopicPublisher2 {
+public class TopicPublisher {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(TopicPublisher2.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(TopicPublisher.class);
 
 	@Autowired
 	JmsTemplate jmsTemplate;
@@ -25,7 +25,7 @@ public class TopicPublisher2 {
 		try {
 			String payload = objectMapper.writeValueAsString(genericObject);
 
-			LOGGER.info("sending payload='{}' to topic='{}'", payload, jmsTemplate.getDefaultDestinationName());
+			LOGGER.info("TopicPublisher2: sending payload='{}' to topic='{}'", payload, jmsTemplate.getDefaultDestinationName());
 			jmsTemplate.convertAndSend(jmsTemplate.getDefaultDestinationName(), payload);
 			
 		} catch (JsonProcessingException e) {

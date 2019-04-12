@@ -23,7 +23,7 @@ public class MessageSender {
 	
 	public void sendMessage(final DummyModel model) {
 	
-		System.out.println("Sending from Sender to destination : "+jmsTemplate.getDefaultDestinationName());
+		System.out.println("MessageSender: DummyModel to destination : "+jmsTemplate.getDefaultDestinationName());
 		jmsTemplate.send(new MessageCreator(){
 				@Override
 				public Message createMessage(Session session) throws JMSException{

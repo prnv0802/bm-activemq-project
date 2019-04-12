@@ -14,7 +14,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.messaging.converter.MessageConverter;
 import org.springframework.messaging.converter.SimpleMessageConverter;
 
-@Conditional(P2PCondition.class)
+@Conditional(P2PModeCondition.class)
 @Configuration
 public class QueueMessagingConfiguration {
 
