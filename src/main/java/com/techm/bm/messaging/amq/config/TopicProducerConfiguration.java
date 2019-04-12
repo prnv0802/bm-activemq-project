@@ -31,6 +31,10 @@ public class TopicProducerConfiguration {
 	@Value("${spring.jms.pub-sub-domain}")
 	private boolean pubSubDomain;
 	
+	@Value("${activemq.deliverymode.ispersistent}")
+	private boolean isPersistent;
+	
+	
 	
 	
 	public TopicProducerConfiguration() {
@@ -64,6 +68,7 @@ public class TopicProducerConfiguration {
 		template.setConnectionFactory(connectionFactory());
 		template.setDefaultDestinationName(producerTopic);
 		template.setPubSubDomain(pubSubDomain);
+		template.setDeliveryPersistent(isPersistent);
 		return template;
 	}
 

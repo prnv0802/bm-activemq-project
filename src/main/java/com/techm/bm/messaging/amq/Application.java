@@ -42,7 +42,12 @@ public class Application {
 		//context.getBean(TopicPublisher.class).send(new DummyModel("Pranav", "1"));
 		
 		// case 5 : mode pubsub, Using MessageSender
-		context.getBean(MessageSender.class).sendMessage(new DummyModel("Pranav", "1"));
+		//context.getBean(MessageSender.class).sendMessage(new DummyModel("Pranav", "1"))
+		
+		
+		// case 6 : MessagePostProcessor added to TopicPublisher to mark outgoing messages to be of type String.
+		
+		context.getBean(TopicPublisher.class).send(new DummyModel("Pranav", "1"));
 		
 		try {
 			Thread.sleep(10);

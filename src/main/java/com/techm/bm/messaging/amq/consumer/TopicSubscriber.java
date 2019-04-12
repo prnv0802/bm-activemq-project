@@ -17,7 +17,7 @@ public class TopicSubscriber {
 	@Autowired
 	CustomObjectMapper mapper;
 	
-	@JmsListener(destination = "${topic.name2}")
+	@JmsListener(destination = "${topic.name2}", selector = "messageType='String'")
 	public void listen(@Payload String payload) {
 		LOGGER.info("TopicSubscriber : listen : " + payload);
 		try {

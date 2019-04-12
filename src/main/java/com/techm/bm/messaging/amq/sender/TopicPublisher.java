@@ -26,7 +26,10 @@ public class TopicPublisher {
 			String payload = objectMapper.writeValueAsString(genericObject);
 
 			LOGGER.info("TopicPublisher2: sending payload='{}' to topic='{}'", payload, jmsTemplate.getDefaultDestinationName());
-			jmsTemplate.convertAndSend(jmsTemplate.getDefaultDestinationName(), payload);
+			jmsTemplate.convertAndSend(jmsTemplate.getDefaultDestinationName(), payload, mpp -> {
+				mpp.setStringProperty("messageType", "String");
+	            return mpp;
+	        });
 			
 		} catch (JsonProcessingException e) {
 			LOGGER.error("Unabel to convert Object to JSON", e);
