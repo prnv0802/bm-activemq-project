@@ -31,7 +31,7 @@ public class Application {
 
 		// case 1 : mode p2p, jmpPubSUb false, Using MessageSender queueconfig works 
 		//context.getBean(MessageSender.class).sendMessage(new DummyModel("Pranav", "1"));
-//		
+		
 		// case 2 : mode pubsub, Using TopicPublisher, TopicSubscriber Listens String payload
 		//context.getBean(TopicPublisher.class).send(new DummyModel("Pranav", "1"));
 		
@@ -46,37 +46,18 @@ public class Application {
 		
 		
 		// case 6 : MessagePostProcessor added to TopicPublisher to mark outgoing messages to be of type String.
-		
 		//context.getBean(TopicPublisher.class).send(new DummyModel("Pranav", "1"));
 		
-		try {
+	/*	try {
 			Thread.sleep(10);
 			System.out.println("Sleeping 10 ms after Publisher 2");
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		
 	}
 
-	
-    
-//    @Bean
-//    public DefaultMessageHandlerMethodFactory handlerMethodFactory() {
-//        DefaultMessageHandlerMethodFactory factory = new DefaultMessageHandlerMethodFactory();
-//        factory.setMessageConverter((org.springframework.messaging.converter.MessageConverter) messageConverter());
-//        return factory;
-//    }
-//
-//    @Bean
-//    public MappingJackson2MessageConverter messageConverter() {
-//        return new MappingJackson2MessageConverter();
-//    }
-//
-//    public void configureJmsListeners(JmsListenerEndpointRegistrar registrar) {
-//        registrar.setMessageHandlerMethodFactory(handlerMethodFactory());
-//    }
-    
 	@Bean
 	public JettyEmbeddedServletContainerFactory jettyEmbeddedServletContainerFactory(
 			@Value("${server.port}") final String port,
