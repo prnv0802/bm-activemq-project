@@ -20,42 +20,41 @@ public class QueueMessagingConfiguration {
 
 	@Value("${spring.activemq.broker-url}")
 	private String brokerUrl;
-	
-	
+
 	@Value("${sender-queue}")
 	private String senderQueue;
-	
 
 	@Value("${session-cache-size}")
 	private int sessionCacheSize;
-	
+
 	public QueueMessagingConfiguration() {
 		super();
 		System.out.println("Creating QueueMessagingConfiguration");
 	}
-	
+
 	@Bean
-	public ActiveMQConnectionFactory connectionFactory(){
+	public ActiveMQConnectionFactory connectionFactory() {
 		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
 		connectionFactory.setBrokerURL(brokerUrl);
-		connectionFactory.setTrustedPackages(Arrays.asList("com.techm.bm.messaging.amq","com.techm.bm.messaging.amq.model"));
+		connectionFactory
+				.setTrustedPackages(Arrays.asList("com.techm.bm.messaging.amq", "com.techm.bm.messaging.amq.model"));
 		return connectionFactory;
 	}
-	
+
 	/*
-     * Optionally you can use cached connection factory if performance is a big concern.
-     */
- 
-    @Bean
-    public ConnectionFactory cachingConnectionFactory(){
-        CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
-        connectionFactory.setTargetConnectionFactory(connectionFactory());
-        connectionFactory.setSessionCacheSize(sessionCacheSize);
-        return connectionFactory;
-    }
-    
-	@Bean 
-	public JmsTemplate jmsTemplate(){
+	 * Optionally you can use cached connection factory if performance is a big
+	 * concern.
+	 */
+	@Bean
+	public ConnectionFactory cachingConnectionFactory() {
+		CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
+		connectionFactory.setTargetConnectionFactory(connectionFactory());
+		connectionFactory.setSessionCacheSize(sessionCacheSize);
+		return connectionFactory;
+	}
+
+	@Bean
+	public JmsTemplate jmsTemplate() {
 		JmsTemplate template = new JmsTemplate();
 		template.setConnectionFactory(connectionFactory());
 		template.setDefaultDestinationName(senderQueue);
@@ -63,7 +62,7 @@ public class QueueMessagingConfiguration {
 	}
 
 	@Bean
-    MessageConverter converter(){
-        return new SimpleMessageConverter();
-    }
+	MessageConverter converter() {
+		return new SimpleMessageConverter();
+	}
 }

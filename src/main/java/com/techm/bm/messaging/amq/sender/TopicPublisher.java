@@ -16,28 +16,29 @@ public class TopicPublisher {
 
 	@Autowired
 	JmsTemplate jmsTemplate;
-	
+
 	@Autowired
 	private CustomObjectMapper objectMapper;
-	
+
 	public void send(Object genericObject) {
-		
+
 		try {
 			String payload = objectMapper.writeValueAsString(genericObject);
 
-			LOGGER.info("TopicPublisher2: sending payload='{}' to topic='{}'", payload, jmsTemplate.getDefaultDestinationName());
+			LOGGER.info("TopicPublisher2: sending payload='{}' to topic='{}'", payload,
+					jmsTemplate.getDefaultDestinationName());
+			
+			// Note the use of MessagePostProcess passed as lambda
 			jmsTemplate.convertAndSend(jmsTemplate.getDefaultDestinationName(), payload, mpp -> {
 				mpp.setStringProperty("messageType", "String");
-	            return mpp;
-	        });
-			
+				return mpp;
+			});
+
 		} catch (JsonProcessingException e) {
 			LOGGER.error("Unabel to convert Object to JSON", e);
 		} catch (Exception e) {
-			LOGGER.error("Error while updating product catalog specification", e);
+			LOGGER.error("Exception occured.", e.getMessage());
 		}
 	}
-
-
 
 }

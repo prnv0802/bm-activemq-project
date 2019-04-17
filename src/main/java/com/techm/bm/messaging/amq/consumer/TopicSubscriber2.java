@@ -16,18 +16,21 @@ public class TopicSubscriber2 {
 
 	@Autowired
 	CustomObjectMapper mapper;
-	
+
+	/**
+	 * 
+	 * @param model
+	 *            accepts POJO message. implements selector as well.
+	 */
 	@JmsListener(destination = "${topic.name2}", selector = "messageType='DummyModel'")
 	public void listen(DummyModel model) {
-		LOGGER.info("\n" + 
-				"	TopicSubscriber2: listen : model " + model);
+		LOGGER.info("\n" + "	TopicSubscriber2: listen : model " + model);
 		try {
 			System.out.println("TopicSubscriber2: Listening model" + model);
 
-			// utilise the object mapper here to convert the 
+			// utilise the object mapper here to convert the
 			// message to your desired model.
-			
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		}

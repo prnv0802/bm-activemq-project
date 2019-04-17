@@ -10,7 +10,6 @@ import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
 import com.techm.bm.messaging.amq.mapper.CustomObjectMapper;
-import com.techm.bm.messaging.amq.model.DummyModel;
 
 @Component
 public class TopicSubscriber3 {
@@ -19,16 +18,20 @@ public class TopicSubscriber3 {
 
 	@Autowired
 	CustomObjectMapper mapper;
-	
+
+	/**
+	 * 
+	 * @param message
+	 *            of type Message. No selector example.
+	 */
 	@JmsListener(destination = "${topic.name2}")
 	public void listen(Message message) {
 		LOGGER.info("TopicSubscriber3: listen Message " + message);
 		try {
 			System.out.println("TopicSubscriber3: Listening Message" + message);
 
-			if(message instanceof ActiveMQTextMessage)
-			{
-				System.out.println("Text Message "+((ActiveMQTextMessage) message).getText());
+			if (message instanceof ActiveMQTextMessage) {
+				System.out.println("Text Message " + ((ActiveMQTextMessage) message).getText());
 			}
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());

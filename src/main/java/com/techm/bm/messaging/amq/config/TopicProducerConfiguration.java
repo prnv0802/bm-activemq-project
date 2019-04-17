@@ -20,50 +20,47 @@ public class TopicProducerConfiguration {
 
 	@Value("${spring.activemq.broker-url}")
 	private String brokerUrl;
-	
+
 	@Value("${topic.name1}")
 	private String producerTopic;
-	
 
 	@Value("${session-cache-size}")
 	private int sessionCacheSize;
-	
+
 	@Value("${spring.jms.pub-sub-domain}")
 	private boolean pubSubDomain;
-	
+
 	@Value("${activemq.deliverymode.ispersistent}")
 	private boolean isPersistent;
-	
-	
-	
-	
+
 	public TopicProducerConfiguration() {
 		super();
 		System.out.println("Creating TopicProducerConfiguration");
 	}
 
 	@Bean
-	public ActiveMQConnectionFactory connectionFactory(){
+	public ActiveMQConnectionFactory connectionFactory() {
 		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
 		connectionFactory.setBrokerURL(brokerUrl);
-		connectionFactory.setTrustedPackages(Arrays.asList("com.techm.bm.messaging.amq","com.techm.bm.messaging.amq.model"));
+		connectionFactory
+				.setTrustedPackages(Arrays.asList("com.techm.bm.messaging.amq", "com.techm.bm.messaging.amq.model"));
 		return connectionFactory;
 	}
-	
+
 	/*
-     * Optionally you can use cached connection factory if performance is a big concern.
-     */
- 
-    @Bean
-    public ConnectionFactory cachingConnectionFactory(){
-        CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
-        connectionFactory.setTargetConnectionFactory(connectionFactory());
-        connectionFactory.setSessionCacheSize(sessionCacheSize);
-        return connectionFactory;
-    }
-    
-	@Bean 
-	public JmsTemplate jmsTemplate(){
+	 * Optionally you can use cached connection factory if performance is a big
+	 * concern.
+	 */
+	@Bean
+	public ConnectionFactory cachingConnectionFactory() {
+		CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
+		connectionFactory.setTargetConnectionFactory(connectionFactory());
+		connectionFactory.setSessionCacheSize(sessionCacheSize);
+		return connectionFactory;
+	}
+
+	@Bean
+	public JmsTemplate jmsTemplate() {
 		JmsTemplate template = new JmsTemplate();
 		template.setConnectionFactory(connectionFactory());
 		template.setDefaultDestinationName(producerTopic);
@@ -73,7 +70,7 @@ public class TopicProducerConfiguration {
 	}
 
 	@Bean
-    MessageConverter converter(){
-        return new SimpleMessageConverter();
-    }
+	MessageConverter converter() {
+		return new SimpleMessageConverter();
+	}
 }

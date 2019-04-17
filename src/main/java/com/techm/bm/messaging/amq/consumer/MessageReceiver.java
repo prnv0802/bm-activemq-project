@@ -11,20 +11,19 @@ import org.springframework.stereotype.Component;
 
 import com.techm.bm.messaging.amq.model.DummyModel;
 
-
 @Component
 public class MessageReceiver {
 
 	static final Logger LOG = LoggerFactory.getLogger(MessageReceiver.class);
-	
+
 	@JmsListener(destination = "${receiver-queue}")
 	public void receiveMessage(final Message<DummyModel> message) throws JMSException {
 		LOG.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
-		MessageHeaders headers =  message.getHeaders();
+		MessageHeaders headers = message.getHeaders();
 		LOG.info("MessageReceiver : headers received : {}", headers);
-		
+
 		DummyModel response = message.getPayload();
-		LOG.info("MessageReceiver : response received : {}",response);	
+		LOG.info("MessageReceiver : response received : {}", response);
 		LOG.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
 	}
 }

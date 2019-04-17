@@ -16,17 +16,20 @@ public class TopicSubscriber {
 
 	@Autowired
 	CustomObjectMapper mapper;
-	
+
+	/**
+	 * 
+	 * @param payload String message, uses selector
+	 */
 	@JmsListener(destination = "${topic.name2}", selector = "messageType='String'")
 	public void listen(@Payload String payload) {
 		LOGGER.info("TopicSubscriber : listen : " + payload);
 		try {
 			System.out.println("TopicSubscriber: Listening Payload String " + payload);
 
-			// utilise the object mapper here to convert the 
+			// utilise the object mapper here to convert the
 			// message to your desired model.
-			
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		}

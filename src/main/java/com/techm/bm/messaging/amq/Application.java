@@ -48,14 +48,6 @@ public class Application {
 		// case 6 : MessagePostProcessor added to TopicPublisher to mark outgoing messages to be of type String.
 		//context.getBean(TopicPublisher.class).send(new DummyModel("Pranav", "1"));
 		
-	/*	try {
-			Thread.sleep(10);
-			System.out.println("Sleeping 10 ms after Publisher 2");
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
 	}
 
 	@Bean
