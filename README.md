@@ -56,7 +56,7 @@ _Delete .settings, .project and .classpath before you import it in eclipse or an
 
 # How to use generated project
 
-### application.properties contains following important properties which are to be defined in order to use the project in point-to-point or publisher-subscriber mode.
+__application.properties__** contains following important properties which are to be defined in order to use the project in **point-to-point or **publisher-subscriber mode.
 
 ```
 #activemq broker props
