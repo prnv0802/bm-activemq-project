@@ -3,7 +3,7 @@
 ### Download the archetype on local and install it
 
 
-> mvn install
+>  mvn install
 
 ### Use below command to generate project from Archetype.
 
@@ -51,12 +51,12 @@
 ```
 
 ### Required project from archetype will be generated.
-
 _Delete .settings, .project and .classpath before you import it in eclipse or any other IDE._
+
 
 # How to use generated project
 
-__application.properties__** contains following important properties which are to be defined in order to use the project in **point-to-point or **publisher-subscriber mode.
+**application.properties** contains following important properties which are to be defined in order to use the project in **point-to-point** or **publisher-subscriber** mode.
 
 ```
 #activemq broker props
@@ -85,6 +85,7 @@ topic.name2=myTopic
 # session cache size
 session-cache-size=10
 ```
+
   This property acts as a switch to toggle behaviour from p2p to pub sub.
 > activemq.mode=p2p
 
