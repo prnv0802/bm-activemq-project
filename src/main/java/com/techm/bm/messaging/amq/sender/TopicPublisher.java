@@ -20,14 +20,22 @@ public class TopicPublisher {
 	@Autowired
 	private CustomObjectMapper objectMapper;
 
+	public JmsTemplate getJmsTemplate() {
+		return jmsTemplate;
+	}
+
+	public CustomObjectMapper getObjectMapper() {
+		return objectMapper;
+	}
+
 	public void send(Object genericObject) {
 
 		try {
 			String payload = objectMapper.writeValueAsString(genericObject);
 
-			LOGGER.info("TopicPublisher2: sending payload='{}' to topic='{}'", payload,
+			LOGGER.info("TopicPublisher: sending payload='{}' to topic='{}'", payload,
 					jmsTemplate.getDefaultDestinationName());
-			
+
 			// Note the use of MessagePostProcess passed as lambda
 			jmsTemplate.convertAndSend(jmsTemplate.getDefaultDestinationName(), payload, mpp -> {
 				mpp.setStringProperty("messageType", "String");
@@ -40,5 +48,12 @@ public class TopicPublisher {
 			LOGGER.error("Exception occured.", e.getMessage());
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "TopicPublisher [jmsTemplate=" + jmsTemplate + ", objectMapper=" + objectMapper + "]";
+	}
+	
+	
 
 }
