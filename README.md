@@ -2,14 +2,14 @@
 
 ###Download the archetype on local and install it
 
-```
->mvn install
-```
+
+> mvn install
+
 ###Use below command to generate project from Archetype.
 
 >
-```mvn archetype:generate -DarchetypeGroupId=com.techm.bm.messaging -DarchetypeArtifactId=bm-activemq-project-archetype -DarchetypeVersion=1.0
-```
+mvn archetype:generate -DarchetypeGroupId=com.techm.bm.messaging -DarchetypeArtifactId=bm-activemq-project-archetype -DarchetypeVersion=1.0
+
 
 ###Give groupId, artifactId and version for the project you want to create in interactive mode.
 
