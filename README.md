@@ -7,8 +7,9 @@
 
 ### Use below command to generate project from Archetype.
 
->
-mvn archetype:generate -DarchetypeGroupId=com.techm.bm.messaging -DarchetypeArtifactId=bm-activemq-project-archetype -DarchetypeVersion=1.0
+>  mvn archetype:generate -DarchetypeGroupId=com.techm.bm.messaging
+  -DarchetypeArtifactId=bm-activemq-project-archetype
+  -DarchetypeVersion=1.0
 
 
 ### Give groupId, artifactId and version for the project you want to create in interactive mode.
@@ -54,3 +55,44 @@ mvn archetype:generate -DarchetypeGroupId=com.techm.bm.messaging -DarchetypeArti
 _Delete .settings, .project and .classpath before you import it in eclipse or any other IDE._
 
 # How to use generated project
+
+### application.properties contains following important properties which are to be defined in order to use the project in point-to-point or publisher-subscriber mode.
+
+```
+#activemq broker props
+spring.activemq.broker-url=tcp://localhost:61616
+spring.activemq.user=admin
+spring.activemq.password=admin
+
+#2 valid values p2p, pubsub
+activemq.mode=p2p
+
+# valid values true and false:
+# for activemq.mode=p2p, keep this false
+# for activemq.mode=pubsub keep this true
+spring.jms.pub-sub-domain=false
+
+# sender queue name
+sender-queue=sender-queue
+# receiver queue name
+receiver-queue=sender-queue
+
+# multiple topics can be created.
+#Give different topic names to publish and subscribe on different topics.
+topic.name1=myTopic
+topic.name2=myTopic
+
+# session cache size
+session-cache-size=10
+```
+  This property acts as a switch to toggle behaviour from p2p to pub sub.
+> activemq.mode=p2p
+
+  This property is false for p2p mode and true for pubsub mode. When true, it allows subscription by multiple Subscribers.
+> spring.jms.pub-sub-domain=false
+
+  For ease queue and topic names are taken similar as producer and consumer are working on same broker(queue and topic).
+  If required these can be changed to any suitable name to achieve deployment as separate application.
+  
+  
+  ### _Please feel free to delete unused code in your generated code as per usecase._
